@@ -1,0 +1,13 @@
+# GENERAL
+Create virtualenv: python3 -m venv venv
+Activate virtualenv: source venv/bin/activate
+Deactivate virtualenv: deactivate
+Check running processes on port:  netstat -anp tcp | grep <port>
+Kill process: sudo kill -9 <PID>
+
+# ALEMBIC
+Generate migration: alembic revision --autogenerate -m "<description...>"
+Upgrade migration: alembic upgrade head
+Downgrade migration (to specific migration): alembic downgrade <migration id>
+Downgrade migration (down 1): alembic downgrade -1
+Downgrade migration (to default base): alembic downgrade base

@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/__pycache__": true
+    },
+    "python.defaultInterpreterPath": "./server/venv/bin/python"
+}
