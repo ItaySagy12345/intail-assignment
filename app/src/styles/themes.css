@@ -1,0 +1,28 @@
+:root {
+    /* Colors */
+    --primary-color: rgb(17, 61, 122);
+    --secondary-color: #21BECB;
+    --tertiary-color: rgb(19, 62, 123);
+
+    --bg-color-primary: #ddf7fa;
+    --bg-color-secondary: #fbfbfb;
+
+    --theme-grey-color: #eee;
+    --theme-grey-hover-color: rgba(61, 61, 61, 0.8);
+    --on-surface-color: rgb(109, 109, 109);
+
+    --panel-color: white;
+    --panel-hover-color: #f8f8f8;
+
+    --text-color-weak: #8c8c8d;
+    --text-color: #6e6e73;
+    --text-color-strong: #404041;
+
+    /* Generic */
+    --app-gap: 24px;
+    --app-margin: 24px;
+    --app-padding: 24px;
+    --app-border-radius: 8px;
+    --app-box-shadow: 0 5px 10px rgb(100 116 139 / 6%), 0 1px 2px rgb(100 116 139 / 10%);
+    --app-hover-box-shadow: 0 5px 10px rgb(100 116 139 / 15%), 0 1px 2px rgb(100 116 139 / 15%);
+}

@@ -1,0 +1,22 @@
+@import '@/styles/mixins.scss';
+
+.sidebar {
+    @include col;
+    height: 100%;
+    width: 160px;
+    padding: 8px;
+    align-items: center;
+
+    background-color: var(--primary-color);
+
+    .tabs {
+        @include col;
+        width: 90%;
+        gap: var(--app-gap);
+
+        .tab {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
