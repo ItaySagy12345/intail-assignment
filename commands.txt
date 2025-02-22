@@ -2,6 +2,8 @@
 Create virtualenv: python3 -m venv venv
 Activate virtualenv: source venv/bin/activate
 Deactivate virtualenv: deactivate
+Check running processes on port:  lsof -i :5432
+Check running processes on port:  sudo lsof -i :5432
 Check running processes on port:  netstat -anp tcp | grep <port>
 Kill process: sudo kill -9 <PID>
 
