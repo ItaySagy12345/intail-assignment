@@ -1,5 +1,5 @@
 import { Quote } from '@/generics/interfaces/models/quote';
-import styles from './Quote.module.scss';
+import styles from './QuoteWrapper.module.scss';
 
 interface QuoteProps {
     quote: Quote;

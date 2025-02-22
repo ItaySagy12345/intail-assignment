@@ -1,21 +1,16 @@
 :root {
     /* Colors */
     --primary-color: rgb(17, 61, 122);
-    --secondary-color: #21BECB;
-    --tertiary-color: rgb(19, 62, 123);
+    --secondary-color: gold;
 
     --bg-color-primary: #ddf7fa;
     --bg-color-secondary: #fbfbfb;
-
-    --theme-grey-color: #eee;
-    --theme-grey-hover-color: rgba(61, 61, 61, 0.8);
-    --on-surface-color: rgb(109, 109, 109);
 
     --panel-color: white;
     --panel-hover-color: #f8f8f8;
 
     --text-color-weak: #8c8c8d;
-    --text-color: #6e6e73;
+    --text-color-medium: #6e6e73;
     --text-color-strong: #404041;
 
     /* Generic */

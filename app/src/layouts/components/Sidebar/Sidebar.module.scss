@@ -3,20 +3,9 @@
 .sidebar {
     @include col;
     height: 100%;
-    width: 160px;
-    padding: 8px;
+    width: 200px;
+    gap: var(--app-gap);
+    padding: var(--app-padding);
     align-items: center;
-
     background-color: var(--primary-color);
-
-    .tabs {
-        @include col;
-        width: 90%;
-        gap: var(--app-gap);
-
-        .tab {
-            color: white;
-            text-decoration: none;
-        }
-    }
 }

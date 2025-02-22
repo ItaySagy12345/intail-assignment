@@ -1,16 +1,17 @@
+import { Routes } from "@/generics/enums/routes-enums";
 import HomePage from "@/pages/HomePage/HomePage";
 import QuotesPage from "@/pages/QuotesPage/QuotesPage";
 
 const appRouter = [
   {
-    path: '',
+    path: Routes.HOME,
     children: [
       {
         index: true,
         element: <HomePage />
       },
       {
-        path: 'quotes',
+        path: Routes.QUOTES,
         children: [
           {
             index: true,

@@ -1,0 +1,17 @@
+@import '@/styles/mixins.scss';
+
+.tabs {
+    @include col;
+    width: 80%;
+    gap: var(--app-gap);
+
+    .tab {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:hover {
+            color: var(--secondary-color);
+        }
+    }
+}
