@@ -8,6 +8,8 @@ class QuoteCreateSchema(BaseModel):
 
     slug: str
     name: str
+    text: str
+    author: str
 
 
 class QuoteSchema(BaseModel):

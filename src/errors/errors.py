@@ -17,3 +17,13 @@ class ArgumentsError(HTTPException):
      
     def __init__(self, message: Optional[str]):
         super().__init__(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=message)
+
+class InternalServerError(HTTPException):
+    """
+    Internal Server error class, returns status code 500
+    """
+     
+    def __init__(self, message: Optional[str]):
+        super().__init__(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=message)
+
+        

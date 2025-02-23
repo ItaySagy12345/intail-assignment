@@ -5,7 +5,6 @@ from src.models.quote_model import Quote
 from src.schemas.quotes_schemas import QuoteSchema
 from src.generics.base_response import BaseResponse
 from src.dependencies.db_dep import db_dep
-from src.utils.slug_generator import slug_generator
 
 
 quotes_router = APIRouter()

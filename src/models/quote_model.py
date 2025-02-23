@@ -11,3 +11,5 @@ class Quote(CrudBase, Base):
     id = Column(Integer, primary_key=True, index=True)
     slug = Column(String, unique=True, index=True)
     name = Column(String, index=True)
+    text = Column(String, index=True)
+    author = Column(String, index=True)
