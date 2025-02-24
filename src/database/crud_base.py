@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from src.errors.errors import NotFoundError
 from typing import Union
+from src.generics.api_interfaces import ApiFilter
 from src.utils.logger import logger
 
 
@@ -27,19 +28,21 @@ class CrudBase:
         return query.count()
 
     @classmethod
-    def list(cls: DeclarativeMeta, db: Session) -> Union[list[DeclarativeMeta], None]:
+    def list(cls: DeclarativeMeta, db: Session, filter: ApiFilter) -> Union[list[DeclarativeMeta], None]:
         """
         List method for database models
         Param: db [Session]: The database session
         Return [Union[list[DeclarativeMeta], None]]: A list of the records
         """
 
-        models = db.query(cls).all()
+        query = db.query(cls)
 
-        if not models:
-            return []
-        
-        return models
+        if filter:
+            offset = filter.page * filter.size
+            query = query.offset(offset).limit(filter.size)
+
+        return query.all()
+
 
     @classmethod
     def find(cls: DeclarativeMeta, db: Session, slug: str) -> Union[DeclarativeMeta, None]:

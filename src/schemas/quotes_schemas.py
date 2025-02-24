@@ -1,24 +1,25 @@
 from pydantic import BaseModel
 
 
-class QuoteCreateSchema(BaseModel):
-    """
-    Schema for creating a new quote
-    """
-
+class QuoteSchemaBase(BaseModel):
     slug: str
     name: str
     text: str
     author: str
 
 
-class QuoteSchema(BaseModel):
+class QuoteCreateSchema(QuoteSchemaBase):
+    """
+    Schema for creating a new quote
+    """
+
+    pass
+
+
+class QuoteSchema(QuoteSchemaBase):
     """
     Schema for a quote
     """
-
-    slug: str
-    name: str
 
     class Config:
         from_attributes=True

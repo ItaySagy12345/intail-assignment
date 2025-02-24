@@ -28,37 +28,36 @@ services:
     volumes:
       - ./pgpass:/pgpass
       - ./servers.json:/pgadmin4/servers.json
+  # server:
+  #   image: server
+  #   container_name: server-container
+  #   env_file:
+  #     - .env
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     DATABASE_URL: postgres://postgres:postgres@postgres:5432/quote_master_db
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - quote-master-net
+  #   volumes:
+  #     - .:/app
+  #   command: >
+  #     sh -c "
+  #       echo 'Waiting for Postgres to be ready...';
+  #       until nc -z -v -w30 postgres 5432; do
+  #         echo 'Waiting for Postgres...';
+  #       done;
 
-  server:
-    image: server
-    container_name: server-container
-    env_file:
-      - .env
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/quote_master_db
-    ports:
-      - "8000:8000"
-    depends_on:
-      - postgres
-    networks:
-      - quote-master-net
-    volumes:
-      - .:/app
-    command: >
-      sh -c "
-        echo 'Waiting for Postgres to be ready...';
-        until nc -z -v -w30 postgres 5432; do
-          echo 'Waiting for Postgres...';
-        done;
-
-        echo 'Postgres is up, running migrations...';
-        alembic upgrade head && 
-        echo 'Migrations complete';
-        uvicorn src.server:app --host 0.0.0.0 --port 8000
-      "
+  #       echo 'Postgres is up, running migrations...';
+  #       alembic upgrade head && 
+  #       echo 'Migrations complete';
+  #       uvicorn src.server:app --host 0.0.0.0 --port 8000
+  #     "
 
 networks:
   quote-master-net:

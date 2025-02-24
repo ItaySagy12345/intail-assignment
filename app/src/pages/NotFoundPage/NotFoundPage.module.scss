@@ -1,3 +1,10 @@
 @import '@/styles/mixins.scss';
 
-.notFoundPage {}
+.notFoundPage {
+    @include Page;
+    @include col;
+    @include center;
+    font-size: 24px;
+    gap: var(--app-gap);
+    font-weight: bold;
+}

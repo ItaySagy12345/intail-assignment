@@ -10,7 +10,7 @@ function QuotesList({ quotes }: QuotesListProps) {
     return (
         <div className={styles.quotesList}>
             {quotes.map((quote: Quote) => (
-                <QuoteWrapper quote={quote} />
+                <QuoteWrapper key={quote.slug} quote={quote} />
             ))}
         </div>
     );

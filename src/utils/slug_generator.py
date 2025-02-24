@@ -1,5 +1,6 @@
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.orm import Session
+from typing import Union
 
 
 def slug_generator(db: Session, name: str, model: DeclarativeMeta) -> str:
@@ -11,7 +12,7 @@ def slug_generator(db: Session, name: str, model: DeclarativeMeta) -> str:
     Return: [String]: The generated slug
     """
 
-    record_exists = model.find(db=db, slug=name)
+    record_exists: Union[DeclarativeMeta, None] = model.find(db=db, slug=name)
     
     if record_exists:
         num_records: int = model.count(db=db, name=name)

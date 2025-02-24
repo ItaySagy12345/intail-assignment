@@ -1,0 +1,11 @@
+@import '@/styles/mixins.scss';
+
+.error {
+    @include row;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%);
+    color: red;
+    gap: var(--app-gap);
+}

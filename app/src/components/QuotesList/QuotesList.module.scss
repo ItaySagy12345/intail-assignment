@@ -1,6 +1,8 @@
 @import '@/styles/mixins.scss';
 
 .quotesList {
-    height: 500px;
-    width: 500px;
+    @include col;
+    width: 60%;
+    gap: var(--app-gap);
+    overflow: auto;
 }

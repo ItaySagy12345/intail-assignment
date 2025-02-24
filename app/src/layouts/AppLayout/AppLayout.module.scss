@@ -4,13 +4,5 @@
     @include row;
     height: 100%;
     width: 100%;
-
-    .page {
-        @include col;
-        height: 100%;
-        width: 100%;
-        overflow-y: auto;
-        padding: var(--app-padding);
-        background-color: var(--bg-color-secondary);
-    }
+    padding: var(--app-padding);
 }

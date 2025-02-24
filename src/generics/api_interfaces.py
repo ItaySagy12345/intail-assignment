@@ -10,3 +10,12 @@ class BaseResponse(BaseModel, Generic[T]):
 
     data: T
     meta: dict = {}
+
+
+class ApiFilter(BaseModel):
+    """
+    Api filter class for pagination
+    """
+
+    page: int
+    size: int

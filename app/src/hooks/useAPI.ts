@@ -5,7 +5,6 @@ interface useAPIReturn<T> {
   error: boolean;
   loading: boolean;
   response: Response<T>;
-  updateData: (data: T, meta: Record<string, null> | null) => void;
 }
 
 function useAPI<T>(fetcher: (...params: any) => Promise<Response<T>>, dependencies: any[] = []): useAPIReturn<T> {
@@ -23,7 +22,7 @@ function useAPI<T>(fetcher: (...params: any) => Promise<Response<T>>, dependenci
     try {
       const response: any = await fetcher();
       setLoading(false);
-      setResponse(response);
+      setResponse(response.data);
     } catch (e: any) {
       setError(true);
     } finally {
@@ -31,19 +30,10 @@ function useAPI<T>(fetcher: (...params: any) => Promise<Response<T>>, dependenci
     }
   };
 
-  const updateData = (data: T, meta: Record<string, null> | null = null): void => {
-    if (!meta) {
-      meta = response.meta;
-    }
-    const updatedResponse: Response = { data, meta };
-    setResponse(updatedResponse);
-  };
-
   return {
     error,
     loading,
-    response,
-    updateData
+    response
   };
 };
 

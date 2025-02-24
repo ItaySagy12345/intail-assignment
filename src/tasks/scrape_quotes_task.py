@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from src.dependencies.db_dep import db_dep
 from src.schemas.quotes_schemas import QuoteCreateSchema
 from src.utils.slug_generator import slug_generator
-from src.models.quote_model import Quote
+from src.models.models import Quote
 from src.errors.errors import InternalServerError
 from typing import Union
 from src.database.config import SessionLocal
@@ -30,14 +30,14 @@ def scrape_quotes_task() -> None:
                     name: str = f"{author[:3]}-{text[:5]}"
                     slug: str = slug_generator(db=db, name=name, model=Quote)
 
-                    new_quote = QuoteCreateSchema(
+                    create_quote = QuoteCreateSchema(
                         name=name,
                         slug=slug,
                         text=text,
                         author=author
                     )
 
-                    Quote.create(db, new_quote)
+                    Quote.create(db, create_quote)
 
                 scraper.close()
 
