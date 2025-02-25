@@ -1,12 +1,12 @@
-import Logo from "components/Logo/Logo";
 import { Outlet } from 'react-router-dom';
+
+import styles from './AppLayout.module.scss';
 
 function AppLayout() {
   return (
-    <>
-      <Logo />
+    <div className={styles.appLayout}>
       <Outlet />
-    </>
+    </div>
   );
 }
 

@@ -1,27 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
-import styles from './QuotesList.module.scss';
-import { Quote } from "generics/interfaces/models/quote";
 import QuoteWrapper from "components/QuoteWrapper/QuoteWrapper";
+
+import { useState, useEffect, useRef } from 'react';
+import { Quote } from "generics/interfaces/models/quote";
+
+import styles from './QuotesList.module.scss';
 
 interface QuotesListProps {
   quotes: Quote[];
-  onfetchQuotes: () => void;
+  onScrollEnd: () => void;
 }
 
-function QuotesList({ quotes, onfetchQuotes }: QuotesListProps) {
-  const [isFetching, setIsFetching] = useState(false);
+function QuotesList({ quotes, onScrollEnd }: QuotesListProps) {
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
-      if (scrollTop + clientHeight >= scrollHeight - 10 && !isFetching) {
-        setIsFetching(true);
-        onfetchQuotes();
-      }
-    }
-  };
+  useEffect(() => {
+    if (!isFetching) return;
+    setIsFetching(false);
+  }, [quotes]);
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -36,17 +33,22 @@ function QuotesList({ quotes, onfetchQuotes }: QuotesListProps) {
     };
   }, [isFetching]);
 
-  useEffect(() => {
-    if (!isFetching) return;
-    setIsFetching(false);
-  }, [quotes]);
+  const handleScroll = (): void => {
+    if (scrollContainerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
+
+      if (scrollTop + clientHeight >= scrollHeight - 10 && !isFetching) {
+        setIsFetching(true);
+        onScrollEnd();
+      }
+    }
+  };
 
   return (
     <div className={styles.quotesList} ref={scrollContainerRef}>
-      {quotes.map((quote: Quote) => (
-        <QuoteWrapper key={quote.slug} quote={quote} />
+      {quotes.map((quote: Quote, index: number) => (
+        <QuoteWrapper key={`${quote.slug}-${index}`} quote={quote} />
       ))}
-      {isFetching && <div>Loading...</div>}
     </div>
   );
 }

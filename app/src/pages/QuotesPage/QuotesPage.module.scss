@@ -1,19 +1,26 @@
 @import '@/styles/mixins.scss';
 
 .quotesPage {
-  @include Page;
   @include col;
+  max-height: 100vh;
   align-items: center;
   justify-content: center;
 
-  .header {
+  .headerWrapper {
     width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
+    background-color: var(--bg-color);
     padding: calc(var(--app-padding) / 2);
-    text-align: center;
-    color: var(--primary-color);
-    background-color: white;
+
+    .logo {
+      position: absolute;
+    }
+
+    .header {
+      text-align: center;
+      color: var(--primary-color);
+    }
   }
 }

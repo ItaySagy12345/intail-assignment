@@ -3,18 +3,20 @@
 .quoteWrapper {
   @include col;
   position: relative;
+  margin: var(--app-margin) 0;
   padding: var(--app-padding);
   gap: calc(var(--app-gap) / 2);
   box-shadow: var(--app-box-shadow);
   border-radius: var(--app-border-radius);
 
   .staticInfo {
-    &>button {
+    .enhanceButton {
       height: 72px;
       width: 72px;
       margin-top: -10px;
       position: absolute;
       border-radius: 50%;
+      font-weight: bold;
     }
 
     .info {
@@ -52,5 +54,9 @@
     transform: translate(-50%);
     cursor: pointer;
     color: var(--primary-color);
+
+    &.inactive {
+      cursor: not-allowed;
+    }
   }
 }

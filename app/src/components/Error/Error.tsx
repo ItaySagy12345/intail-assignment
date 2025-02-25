@@ -1,5 +1,6 @@
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import styles from './Error.module.scss';
 
 interface ErrorProps {
@@ -9,8 +10,8 @@ interface ErrorProps {
 function Error({ message }: ErrorProps) {
   return (
     <div className={styles.error}>
-      <FontAwesomeIcon icon={faExclamationCircle} />
-      <p>{message}</p>
+      <FontAwesomeIcon className={styles.icon} icon={faExclamationCircle} />
+      <p className={styles.message}>{message}</p>
     </div>
   );
 }

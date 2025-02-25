@@ -12,7 +12,7 @@ class BaseResponse(BaseModel, Generic[T]):
     meta: dict = {}
 
 
-class ApiFilter:
+class APIFilter:
     """
     Api filter class for pagination
     """

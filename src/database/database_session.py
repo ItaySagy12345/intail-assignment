@@ -2,6 +2,10 @@ from src.database.config import SessionLocal
 
 
 class DatabaseSession:
+    """
+    Context manager for the database session
+    """
+        
     def __init__(self) -> None:
         self.db = SessionLocal()
     

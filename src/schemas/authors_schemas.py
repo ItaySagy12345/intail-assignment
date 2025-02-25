@@ -4,6 +4,10 @@ from src.schemas.books_schemas import BookSchema
 
 
 class AuthorSchemaBase(BaseModel):
+    """
+    Abstract Schema for an author
+    """
+        
     slug: str
     name: str
     birth_date: str
@@ -20,7 +24,7 @@ class AuthorCreateSchema(AuthorSchemaBase):
 
 class AuthorSchema(AuthorSchemaBase):
     """
-    Schema for an author
+    Schema for an author to return to the client
     """
 
     books: list[BookSchema]

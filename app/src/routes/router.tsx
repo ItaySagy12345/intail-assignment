@@ -1,8 +1,10 @@
 import * as Config from 'config/config';
+
 import AppLayout from "layouts/AppLayout/AppLayout";
-import { createBrowserRouter } from "react-router-dom";
 import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import appRouter from "routes/appRouter";
+
+import { createBrowserRouter } from "react-router-dom";
 
 const defaultRouter = createBrowserRouter([
   {

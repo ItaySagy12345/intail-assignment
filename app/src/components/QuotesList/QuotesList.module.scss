@@ -5,12 +5,9 @@
   height: 100%;
   width: 50%;
   padding: 0 var(--app-padding);
-  gap: var(--app-gap);
-  overflow: hidden;
-  overflow-y: scroll;
+  overflow: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  border: 1px solid red;
 
   &::-webkit-scrollbar {
     display: none;

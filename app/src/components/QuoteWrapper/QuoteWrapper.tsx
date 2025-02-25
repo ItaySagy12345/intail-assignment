@@ -1,27 +1,30 @@
 import * as AuthorsService from 'services/authors-service';
-import styles from './QuoteWrapper.module.scss';
+
+import Button from "components/Button/Button";
+import Error from "components/Error/Error";
+import QuoteStat from "components/QuoteStat/QuoteStat";
+
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import QuoteStat from '../QuoteStat/QuoteStat';
 import { Quote } from "generics/interfaces/models/quote";
 import { Author } from "generics/interfaces/models/author";
-import Button from "components/Button/Button";
 import { Book } from "generics/interfaces/models/book";
-import Error from "components/Error/Error";
+
+import styles from './QuoteWrapper.module.scss';
 
 interface QuoteProps {
   quote: Quote;
 }
 
 function QuoteWrapper({ quote }: QuoteProps) {
-  const [dropdown, setDropdown] = useState<boolean>(false);
   const [author, setAuthor] = useState<Author | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [dropdown, setDropdown] = useState<boolean>(false);
 
   const handleEnhanceClick = async (authorName: string): Promise<void> => {
-    if (!author) {
+    if (!author && !error) {
       try {
         setIsLoading(true);
         await fetchAuthor(authorName);
@@ -34,10 +37,14 @@ function QuoteWrapper({ quote }: QuoteProps) {
       }
     }
 
-    setDropdown(!dropdown);
+    toggleDropdown();
   };
 
-  const handleToggleDropdown = (): void => {
+  const handleToggleDropdownClick = (): void => {
+    (author || error) && toggleDropdown();
+  };
+
+  const toggleDropdown = (): void => {
     setDropdown(!dropdown);
   };
 
@@ -49,7 +56,13 @@ function QuoteWrapper({ quote }: QuoteProps) {
   return (
     <div className={styles.quoteWrapper}>
       <div className={styles.staticInfo}>
-        <Button loading={isLoading} disabled={isLoading} onClick={() => handleEnhanceClick(quote.author)}>Enhance</Button>
+        <Button
+          className={styles.enhanceButton}
+          loading={isLoading}
+          disabled={isLoading}
+          onClick={() => handleEnhanceClick(quote.author)}>
+          Enhance
+        </Button>
         <div className={styles.info}>
           <p className={styles.text}>{quote.text}</p>
           <QuoteStat stat={'Author:'} value={quote.author} />
@@ -72,7 +85,11 @@ function QuoteWrapper({ quote }: QuoteProps) {
         <Error message={error} />
       )}
 
-      <FontAwesomeIcon className={styles.toggleDropdown} icon={dropdown ? faChevronUp : faChevronDown} onClick={handleToggleDropdown} />
+      <FontAwesomeIcon
+        className={`${styles.toggleDropdown} ${(!author && !error) && styles.inactive}`}
+        icon={dropdown ? faChevronUp : faChevronDown}
+        onClick={handleToggleDropdownClick}
+      />
     </div>
   );
 }

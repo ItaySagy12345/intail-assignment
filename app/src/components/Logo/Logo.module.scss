@@ -1,17 +1,9 @@
 @import '@/styles/mixins.scss';
 
 .logo {
-  color: white;
-  font-weight: bold;
   font-size: 20px;
-  background: linear-gradient(to right, white, var(--secondary-color));
-
-  // Chrome support
-  -webkit-background-clip: text;
-  background-clip: text;
+  font-weight: bold;
+  background-image: linear-gradient(white, var(--primary-color));
   color: transparent;
-
-  // Firefox support
-  -webkit-mask-image: linear-gradient(to right, white, var(--secondary-color));
-  mask-image: linear-gradient(to right, white, var(--secondary-color));
+  background-clip: text;
 }

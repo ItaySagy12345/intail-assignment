@@ -1,23 +1,23 @@
 :root {
   /* Colors */
-  --primary-color: rgb(17, 61, 122);
-  --secondary-color: gold;
+  --primary-color: #4a90e2;
 
-  --bg-color-primary: #ddf7fa;
-  --bg-color-secondary: #fbfbfb;
+  --bg-color: #0d1117;
+  --error-color: crimson;
+  --warning-color: gold;
 
-  --panel-color: white;
-  --panel-hover-color: #f8f8f8;
-
-  --text-color-weak: #8c8c8d;
-  --text-color-medium: #6e6e73;
-  --text-color-strong: #404041;
+  --text-color-weak: #8a8a8a;
+  --text-color-medium: #b0b0b0;
+  --text-color-strong: #e0e0e0;
 
   /* Generic */
   --app-gap: 24px;
   --app-margin: 24px;
   --app-padding: 24px;
   --app-border-radius: 8px;
-  --app-box-shadow: 0 5px 10px rgb(100 116 139 / 6%), 0 1px 2px rgb(100 116 139 / 10%);
+  --app-box-shadow:
+    0 10px 20px rgba(100, 116, 139, 0.3),
+    0 4px 8px rgba(100, 116, 139, 0.4),
+    0 2px 4px rgba(255, 255, 255, 0.2);
   --app-hover-box-shadow: 0 5px 10px rgb(100 116 139 / 15%), 0 1px 2px rgb(100 116 139 / 15%);
 }

@@ -1,7 +1,7 @@
-import { Routes } from "generics/enums/routes-enums";
 import HomePage from "pages/HomePage/HomePage";
 import QuotesPage from "pages/QuotesPage/QuotesPage";
 
+import { Routes } from "generics/enums/routes-enums";
 
 const appRouter = [
   {

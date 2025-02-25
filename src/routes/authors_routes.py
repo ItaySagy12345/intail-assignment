@@ -1,5 +1,6 @@
 import re
-import requests
+import httpx
+from typing import Union
 from functools import reduce
 from fastapi import APIRouter, Depends
 from fastapi import status
@@ -13,7 +14,6 @@ from src.schemas.author_books import AuthorBookCreateSchema
 from src.generics.api_interfaces import BaseResponse
 from src.dependencies.author_dep import author_dep
 from src.dependencies.db_dep import db_dep
-from typing import Union
 
 
 authors_router = APIRouter()
@@ -27,27 +27,26 @@ async def get_author(slug: str, author: Author = Depends(author_dep), db: Sessio
     if not author:
         slug_parts: list[str] = re.split(r"[ .]+", slug)
         query_suffix: str = reduce(lambda acc, part: f"{acc}%20{part}", slug_parts)
-        author_initial_meta: dict = requests.get(f"{CONFIG['authors_api']['domain']}/search/authors.json?q={query_suffix}").json()
-        author_key: str = ''
-
-        if "docs" in author_initial_meta and "key" in author_initial_meta["docs"][0]:
-            author_key = author_initial_meta["docs"][0]["key"]
-        else:
-            raise ArgumentsError(message="Could not find author information")
         
-        author_meta: dict = requests.get(f"{CONFIG['authors_api']['domain']}/authors/{author_key}.json").json()
-        author_birth_date: str = ''
-        
-        if "birth_date" in author_meta:
-            author_birth_date = author_meta["birth_date"]
-        else:
-            raise ArgumentsError(message="Could not find author information")
+        async with httpx.AsyncClient() as client:
+            author_initial_meta = await client.get(f"{CONFIG['authors_api']['domain']}/search/authors.json?q={query_suffix}")
+            author_initial_meta = author_initial_meta.json()
 
-        author_death_date: Union[str, None] = author_meta["death_date"] if "death_date" in author_meta else None
- 
-        limit: int = 5
-        books_meta: dict = requests.get(f"{CONFIG['authors_api']['domain']}/authors/{author_key}/works.json?limit={limit}").json()
-        books: Union[list, None] = books_meta["entries"] if "entries" in books_meta else None
+            author_key = ''
+            if "docs" in author_initial_meta and "key" in author_initial_meta["docs"][0]:
+                author_key = author_initial_meta["docs"][0]["key"]
+            else:
+                raise ArgumentsError(message="Could not find author information")
+            
+            author_meta = await client.get(f"{CONFIG['authors_api']['domain']}/authors/{author_key}.json")
+            author_meta = author_meta.json()
+            author_birth_date = author_meta.get("birth_date", '')
+            author_death_date = author_meta.get("death_date", None)
+            
+            limit: int = 5
+            books_meta = await client.get(f"{CONFIG['authors_api']['domain']}/authors/{author_key}/works.json?limit={limit}")
+            books_meta = books_meta.json()
+            books = books_meta.get("entries", None)
 
         new_author = AuthorCreateSchema(
             api_id=author_key,
@@ -70,20 +69,17 @@ async def get_author(slug: str, author: Author = Depends(author_dep), db: Sessio
                         slug=slug,
                         name=slug
                     )
-
                     new_book: Book = Book.create(db=db, data=create_book)
                     new_books.append(new_book)
-                
                 else:
                     new_books.append(book_exists)
 
-        for new_book in new_books:
-            create_author_book = AuthorBookCreateSchema(
-                author_id=author.id,
-                book_id=new_book.id
-            )
-
-            AuthorBook.create(db=db, data=create_author_book)
+            for new_book in new_books:
+                create_author_book = AuthorBookCreateSchema(
+                    author_id=author.id,
+                    book_id=new_book.id
+                )
+                AuthorBook.create(db=db, data=create_author_book)
 
     author = Author.find(db=db, slug=author.slug)
     author_data: AuthorSchema = AuthorSchema.model_validate(author)

@@ -1,7 +1,11 @@
 from pydantic import BaseModel
 
 
-class BookSchemaBase(BaseModel):
+class BookSchemaBase(BaseModel):    
+    """
+    Abstract Schema for a book
+    """
+
     slug: str
     name: str
     
@@ -16,7 +20,7 @@ class BookCreateSchema(BookSchemaBase):
 
 class BookSchema(BookSchemaBase):
     """
-    Schema for a Book
+    Schema for a Book to return to the client
     """
 
     class Config:

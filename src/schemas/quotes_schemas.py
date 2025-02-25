@@ -2,6 +2,10 @@ from pydantic import BaseModel
 
 
 class QuoteSchemaBase(BaseModel):
+    """
+    Abstract Schema for a Quote
+    """
+        
     slug: str
     name: str
     text: str
@@ -18,7 +22,7 @@ class QuoteCreateSchema(QuoteSchemaBase):
 
 class QuoteSchema(QuoteSchemaBase):
     """
-    Schema for a quote
+    Schema for a quote to return to the client
     """
 
     class Config:

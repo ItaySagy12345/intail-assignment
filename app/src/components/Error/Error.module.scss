@@ -6,5 +6,12 @@
   justify-content: center;
   gap: calc(var(--app-gap) / 2);
   padding: calc(var(--app-padding) / 2);
-  color: red;
+
+  .icon {
+    color: var(--error-color);
+  }
+
+  .message {
+    color: var(--warning-color);
+  }
 }

@@ -1,17 +1,20 @@
-from sqlalchemy.orm import Session
-from src.database.database_session import DatabaseSession
-from src.utils.dynamic_content_scraper import DynamicContentScraper
+from typing import Union
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
-from src.dependencies.db_dep import db_dep
+from src.utils.dynamic_content_scraper import DynamicContentScraper
+from src.database.database_session import DatabaseSession
 from src.schemas.quotes_schemas import QuoteCreateSchema
 from src.utils.slug_generator import slug_generator
 from src.models.models import Quote
 from src.errors.errors import InternalServerError
-from typing import Union
 
 
 def scrape_quotes_task() -> None:
+    """
+    Task for scraping quotes from the designated web page
+    Return None
+    """
+            
     with DatabaseSession() as db:
         scraper: Union[DynamicContentScraper, None] = None
         pages: int = 5
