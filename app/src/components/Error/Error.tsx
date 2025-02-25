@@ -3,16 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from './Error.module.scss';
 
 interface ErrorProps {
-    message: string;
+  message: string;
 }
 
 function Error({ message }: ErrorProps) {
-    return (
-        <div className={styles.error}>
-            <p>{message}</p>
-            <FontAwesomeIcon icon={faExclamationCircle} />
-        </div>
-    );
+  return (
+    <div className={styles.error}>
+      <FontAwesomeIcon icon={faExclamationCircle} />
+      <p>{message}</p>
+    </div>
+  );
 }
 
 export default Error;

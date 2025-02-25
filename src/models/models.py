@@ -1,11 +1,9 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from src.database.crud_base import CrudBase
 from sqlalchemy.orm import relationship
 
-
 Base = declarative_base()
-
 
 class Quote(CrudBase, Base):
     __tablename__ = 'quotes'
@@ -21,8 +19,8 @@ class AuthorBook(CrudBase, Base):
     __tablename__ = 'authors_books'
 
     id = Column(Integer, primary_key=True, index=True)
-    author_id = Column(Integer, index=True)
-    book_id = Column(Integer, index=True)
+    author_id = Column(Integer, ForeignKey('authors.id'), index=True)
+    book_id = Column(Integer, ForeignKey('books.id'), index=True)
 
 
 class Book(CrudBase, Base):
@@ -47,7 +45,3 @@ class Author(CrudBase, Base):
     death_date = Column(String, index=True, nullable=True)
 
     books = relationship("Book", secondary="authors_books", back_populates="authors")
-
-    @property
-    def books() -> list[Book]:
-        pass

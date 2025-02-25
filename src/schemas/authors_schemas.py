@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from src.schemas.books_schemas import BookSchema
 
 
 class AuthorSchemaBase(BaseModel):
@@ -22,7 +23,7 @@ class AuthorSchema(AuthorSchemaBase):
     Schema for an author
     """
 
-    books: list[str]
+    books: list[BookSchema]
 
     class Config:
         from_attributes=True

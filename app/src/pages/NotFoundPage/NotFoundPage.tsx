@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './NotFoundPage.module.scss';
-import { Routes } from '@/generics/enums/routes-enums';
-import Button from '@/components/Button/Button';
+import { Routes } from "generics/enums/routes-enums";
+import Button from "components/Button/Button";
 
 function NotFoundPage() {
   const navigate = useNavigate();

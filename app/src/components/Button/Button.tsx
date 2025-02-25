@@ -1,10 +1,11 @@
-import useButton from "./useButton";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { MouseEvent } from "react";
-import { Children } from "@/generics/types/children-types";
-import { ButtonTypes } from "@/generics/enums/button-enums";
 import buttonClasses from './Button.module.scss';
+import { ButtonTypes } from "generics/enums/button-enums";
+import { Children } from "generics/types/children-types";
+import useButton from "components/Button/useButton";
 
 export interface ButtonStyles {
   capitalize: boolean;

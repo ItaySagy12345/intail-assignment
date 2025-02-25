@@ -1,19 +1,45 @@
-import QuotesList from "@/components/QuotesList/QuotesList";
+import * as QuotesService from 'services/quotes-service';
 import styles from './QuotesPage.module.scss';
-import * as QuotesService from '@/services/quotes-service';
-import useAPI from "@/hooks/useAPI";
-import { APIFilter } from "@/generics/interfaces/api-interfaces";
+import { useEffect, useState } from "react";
+import { APIFilter } from "generics/interfaces/api-interfaces";
+import { Quote } from "generics/interfaces/models/quote";
+import QuotesList from "components/QuotesList/QuotesList";
 
 function QuotesPage() {
-    const filter: APIFilter = { page: 1, size: 10 };
-    const { response: { data: quotes = [] } } = useAPI(() => QuotesService.listQuotes(filter));
+  const PAGE = 1;
+  const SIZE = 10;
 
-    return (
-        <div className={styles.quotesPage}>
-            <h1 className={styles.header}>Knowledge is power, hide it well!</h1>
-            <QuotesList quotes={quotes} />
-        </div>
-    );
+  const [filter, setFilter] = useState<APIFilter>({ page: PAGE, size: SIZE });
+  const [quotes, setQuotes] = useState<Quote[]>([]);
+
+  useEffect(() => {
+    fetchQuotes();
+  }, [filter]);
+
+  const fetchQuotes = async (): Promise<void> => {
+    const { data: quotes } = await QuotesService.listQuotes(filter);
+    setQuotes((prevState: Quote[]): Quote[] => [...prevState, ...quotes]);
+  };
+
+  useEffect(() => {
+    console.log(quotes);
+  }, [quotes]);
+
+  useEffect(() => {
+    console.log(filter);
+  }, [filter]);
+
+  const handleFetchQuotes = () => {
+    const incrementedFilter: APIFilter = { ...filter, page: filter.page + 1 };
+    setFilter(incrementedFilter);
+  };
+
+  return (
+    <div className={styles.quotesPage}>
+      <h1 className={styles.header}>Knowledge is power, hide it well!</h1>
+      <QuotesList quotes={quotes} onfetchQuotes={handleFetchQuotes} />
+    </div>
+  );
 }
 
 export default QuotesPage;

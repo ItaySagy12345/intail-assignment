@@ -12,10 +12,12 @@ class BaseResponse(BaseModel, Generic[T]):
     meta: dict = {}
 
 
-class ApiFilter(BaseModel):
+class ApiFilter:
     """
     Api filter class for pagination
     """
 
-    page: int
-    size: int
+    def __init__(self, page: int, size: int):
+        self.page = page
+        self.size = size
+        self.offset = (page - 1) * size

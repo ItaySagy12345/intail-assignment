@@ -38,8 +38,7 @@ class CrudBase:
         query = db.query(cls)
 
         if filter:
-            offset = filter.page * filter.size
-            query = query.offset(offset).limit(filter.size)
+            query = query.offset(filter.offset).limit(filter.size)
 
         return query.all()
 
@@ -49,7 +48,7 @@ class CrudBase:
         """
         Find method for database models
         Param: db [Session]: The database session
-        Param: id [Integer]: The record's id
+        Param: id [String]: The record's slug
         Return [Union[DeclarativeMeta, None]]: The found record if there was one
         """
 

@@ -1,0 +1,15 @@
+@import '@/styles/mixins.scss';
+
+.quoteStat {
+  @include row;
+  gap: var(--app-gap);
+
+  .stat {
+    font-weight: bold;
+    color: var(--text-color-medium);
+  }
+
+  .value {
+    color: var(--text-color-weak);
+  }
+}

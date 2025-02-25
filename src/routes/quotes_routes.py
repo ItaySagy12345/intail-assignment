@@ -16,7 +16,6 @@ async def list_quotes(page: int, size: int, db: Session = Depends(db_dep)):
     Returns a list of quotes back to the client
     """
 
-    filter = ApiFilter(page=page, size=size)
-    quotes: list[Quote] = Quote.list(db=db, filter=filter)
+    quotes: list[Quote] = Quote.list(db=db, filter=ApiFilter(page=page, size=size))
     quotes_data: list[QuoteSchema] = [QuoteSchema.model_validate(quote) for quote in quotes]
     return BaseResponse(data=quotes_data)

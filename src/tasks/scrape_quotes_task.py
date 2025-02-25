@@ -9,25 +9,23 @@ from src.utils.slug_generator import slug_generator
 from src.models.models import Quote
 from src.errors.errors import InternalServerError
 from typing import Union
-from src.database.config import SessionLocal
 
 
 def scrape_quotes_task() -> None:
     with DatabaseSession() as db:
-        base_url = "https://quotes.toscrape.com/js/"
         scraper: Union[DynamicContentScraper, None] = None
         pages: int = 5
 
         try:
-            for page in range(0, pages):
-                url = base_url.format(page)
+            for page in range(1, pages + 1):
+                url = f"https://quotes.toscrape.com/js/page/{page}/"
                 scraper = DynamicContentScraper(url)
                 quote_elements: list[WebElement] = scraper.scrape(key="quote")
 
                 for quote_element in quote_elements:
                     author: str = quote_element.find_element(By.CLASS_NAME, "author").text
                     text: str = quote_element.find_element(By.CLASS_NAME, "text").text
-                    name: str = f"{author[:3]}-{text[:5]}"
+                    name: str = f"{author[:10]}-{text[:5]}"
                     slug: str = slug_generator(db=db, name=name, model=Quote)
 
                     create_quote = QuoteCreateSchema(

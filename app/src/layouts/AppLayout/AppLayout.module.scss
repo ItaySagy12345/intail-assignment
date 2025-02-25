@@ -1,8 +1,0 @@
-@import '@/styles/mixins.scss';
-
-.appLayout {
-    @include row;
-    height: 100%;
-    width: 100%;
-    padding: var(--app-padding);
-}

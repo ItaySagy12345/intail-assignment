@@ -1,20 +1,21 @@
 @mixin row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 @mixin col {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 @mixin center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin Page {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
+  padding: 0 var(--app-padding) var(--app-padding) var(--app-padding);
 }
