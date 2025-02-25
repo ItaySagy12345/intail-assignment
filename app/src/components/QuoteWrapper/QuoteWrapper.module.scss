@@ -1,0 +1,62 @@
+@import '@/styles/mixins.scss';
+
+.quoteWrapper {
+  @include col;
+  position: relative;
+  margin: var(--app-margin) 0;
+  padding: var(--app-padding);
+  gap: calc(var(--app-gap) / 2);
+  box-shadow: var(--app-box-shadow);
+  border-radius: var(--app-border-radius);
+
+  .staticInfo {
+    .enhanceButton {
+      height: 72px;
+      width: 72px;
+      margin-top: -10px;
+      position: absolute;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    .info {
+      @include col;
+      margin-left: 100px;
+      gap: calc(var(--app-gap) / 2);
+
+      .text {
+        font-weight: bold;
+        color: var(--text-color-strong);
+      }
+
+      .author {
+        font-size: 14;
+        color: var(--text-color-weak);
+      }
+    }
+  }
+
+  .dynamicInfo {
+    @include col;
+    margin-left: 100px;
+    gap: calc(var(--app-gap) / 2);
+
+    .books {
+      @include col;
+      gap: calc(var(--app-gap) / 2);
+    }
+  }
+
+  .toggleDropdown {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    cursor: pointer;
+    color: var(--primary-color);
+
+    &.inactive {
+      cursor: not-allowed;
+    }
+  }
+}

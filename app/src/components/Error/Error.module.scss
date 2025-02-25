@@ -1,0 +1,17 @@
+@import '@/styles/mixins.scss';
+
+.error {
+  @include row;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--app-gap) / 2);
+  padding: calc(var(--app-padding) / 2);
+
+  .icon {
+    color: var(--error-color);
+  }
+
+  .message {
+    color: var(--warning-color);
+  }
+}
