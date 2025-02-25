@@ -10,8 +10,8 @@ function QuoteStat({ stat, value }: QuoteStatProps) {
 
   return (
     <div className={styles.quoteStat}>
-      <p className={styles.stat}>{stat ?? FALLBACK}</p>
-      <p className={styles.value}>{value ?? FALLBACK}</p>
+      <p className={styles.stat}>{stat || FALLBACK}</p>
+      <p className={styles.value}>{value || FALLBACK}</p>
     </div>
   );
 }

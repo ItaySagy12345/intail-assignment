@@ -3,6 +3,6 @@ from sqlalchemy.orm import sessionmaker
 from src.config.config import CONFIG
 
 
-engine = create_engine(f'postgresql+psycopg2://{CONFIG["db"]["db_user"]}:{CONFIG["db"]["db_password"]}@{CONFIG["db"]["db_host"]}:{CONFIG["db"]["db_port"]}/{CONFIG["db"]["db_name"]}')
+engine = create_engine(f'postgresql+psycopg2://{CONFIG["db"]["postgres_user"]}:{CONFIG["db"]["postgres_password"]}@{CONFIG["db"]["postgres_host"]}:{CONFIG["db"]["postgres_port"]}/{CONFIG["db"]["postgres_db"]}')
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
