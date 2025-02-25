@@ -7,7 +7,13 @@ from src.schemas.quotes_schemas import QuoteCreateSchema
 from src.utils.slug_generator import slug_generator
 from src.models.models import Quote
 from src.errors.errors import InternalServerError
+from src.utils.logger import logger
+from src.utils.string_helpers import getTimestamp
 
+
+MAX_PAGES = 5
+QUOTES_PER_PAGE = 5
+MAX_QUOTES = MAX_PAGES * QUOTES_PER_PAGE
 
 def scrape_quotes_task() -> None:
     """
@@ -16,12 +22,20 @@ def scrape_quotes_task() -> None:
     """
             
     with DatabaseSession() as db:
+        base_url = f"https://quotes.toscrape.com/js"
+
+        quote_count: int = Quote.count(db=db)
+        if quote_count >= MAX_QUOTES:
+            logger.info(msg=f"[ALERT]: Skipped scraping quotes from: {base_url} at {getTimestamp()}")
+            return
+
         scraper: Union[DynamicContentScraper, None] = None
         pages: int = 5
 
         try:
             for page in range(1, pages + 1):
-                url = f"https://quotes.toscrape.com/js/page/{page}/"
+                url = f"{base_url}/page/{page}/"
+                logger.info(msg=f"[BEGIN]: Scraping quotes from: {url} at {getTimestamp()}")
                 scraper = DynamicContentScraper(url)
                 quote_elements: list[WebElement] = scraper.scrape(key="quote")
 
@@ -39,7 +53,8 @@ def scrape_quotes_task() -> None:
                     )
 
                     Quote.create(db, create_quote)
-
+  
+                logger.info(msg=f"[END]: Scraping quotes from: {url} at {getTimestamp()}")
                 scraper.close()
 
         except Exception as e:

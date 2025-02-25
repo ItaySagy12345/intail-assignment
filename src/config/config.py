@@ -12,10 +12,10 @@ CONFIG = {
         "domain": os.getenv('AUTHORS_API')
     },
     "db": {
-        "db_user": os.getenv('DB_USER'),
-        "db_password": os.getenv('DB_PASSWORD'),
-        "db_host": os.getenv('DB_HOST'),
-        "db_port": int(os.getenv('DB_PORT', 5432)),
-        "db_name": os.getenv('DB_NAME'),
+        "postgres_user": os.getenv('POSTGRES_USER'),
+        "postgres_password": os.getenv('POSTGRES_PASSWORD'),
+        "postgres_host": os.getenv('POSTGRES_HOST'),
+        "postgres_port": int(os.getenv('POSTGRES_PORT')),
+        "postgres_db": os.getenv('POSTGRES_DB')
     }
 }

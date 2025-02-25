@@ -13,8 +13,7 @@ scheduler = BackgroundScheduler()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # scrape_quotes_task()
-    # scheduler.add_job(scrape_quotes, 'interval', seconds=1 * 60 * 60 * 6)
+    scheduler.add_job(scrape_quotes_task, 'interval', seconds=1 * 10)
     scheduler.start()
     yield
     scheduler.shutdown()
@@ -22,8 +21,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 origins = [
-    CONFIG["frontend"]["domain"],  # dev
-    # ".........",  # Prod
+    CONFIG["frontend"]["domain"]
 ]
 
 app.add_middleware(
