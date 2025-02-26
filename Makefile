@@ -1,31 +1,45 @@
-# Python venv Management
-init:
-	python3 -m venv venv
-	venv/bin/pip install --upgrade pip
-	venv/bin/pip install -r requirements.txt
+# Javascript npm management
+.PHONY: app
 
-destroy:
-	rm -rf venv
+app:
+	cd app && npm run dev
+
+init1:
+	cd app && npm i
+
+destroy1:
+	cd app && rm -rf node_modules package-lock.json
+
+# Python pip management
+init2:
+	cd server && python3 -m venv venv
+	cd server && venv/bin/pip install --upgrade pip
+	cd server && venv/bin/pip install -r requirements.txt
+
+destroy2:
+	cd server && rm -rf venv
 
 # Alembic Migration Management
 generate-migration:
-	@read -p "Enter migration description: " description && alembic -c ./alembic.ini revision --autogenerate -m "$$description"
+	cd server && @read -p "Enter migration description: " description && alembic -c ./alembic.ini revision --autogenerate -m "$$description"
 
 upgrade-migration:
-	alembic upgrade head
+	cd server && alembic upgrade head
 
 downgrade-migration:
-	alembic downgrade -1
+	cd server && alembic downgrade -1
 
 # Docker Compose
 build:
-	docker compose up --build
+	cd server && docker compose up --build
 
 up:
-	docker compose up
+	cd server && docker compose up
 
 down:
-	docker compose down
-	docker rmi server
-	docker image prune
-	docker volume prune
+	cd server && docker compose down
+	cd server && docker container prune -f
+	cd server && docker rmi server -f
+	cd server && docker image prune -f
+	cd server && docker volume prune -f
+	cd server && docker network prune -f
