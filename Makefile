@@ -21,7 +21,7 @@ destroy2:
 
 # Alembic Migration Management
 generate-migration:
-	cd server && @read -p "Enter migration description: " description && alembic -c ./alembic.ini revision --autogenerate -m "$$description"
+	cd server && read -p "Enter migration description: " description && alembic -c ./alembic.ini revision --autogenerate -m "$$description"
 
 upgrade-migration:
 	cd server && alembic upgrade head

@@ -74,8 +74,8 @@ function QuoteWrapper({ quote }: QuoteProps) {
           <QuoteStat stat={'Birth Date:'} value={author.birthDate} />
           <QuoteStat stat={'Death Date:'} value={author.deathDate} />
           <p className={styles.books}>
-            {author.books.map((book: Book, index: number) => (
-              <QuoteStat stat={`Book ${index + 1}:`} value={book.name} />
+            {author.books.map((book: string, index: number) => (
+              <QuoteStat stat={`Book ${index + 1}:`} value={book} />
             ))}
           </p>
         </div>

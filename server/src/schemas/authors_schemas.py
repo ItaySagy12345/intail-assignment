@@ -27,7 +27,7 @@ class AuthorSchema(AuthorSchemaBase):
     Schema for an author to return to the client
     """
 
-    books: list[BookSchema]
+    books: list[str]
 
     class Config:
         from_attributes=True

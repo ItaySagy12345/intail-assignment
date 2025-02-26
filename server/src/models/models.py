@@ -11,7 +11,6 @@ class Quote(CrudBase, Base):
 
     id = Column(Integer, primary_key=True, index=True)
     slug = Column(String, unique=True, index=True)
-    name = Column(String, index=True)
     text = Column(String, index=True)
     author = Column(String, index=True)
 
@@ -28,7 +27,7 @@ class Book(CrudBase, Base):
     __tablename__ = 'books'
 
     id = Column(Integer, primary_key=True, index=True)
-    api_id = Column(String, unique=True, index=True)
+    api_id = Column(String, index=True)
     slug = Column(String, unique=True, index=True)
     name = Column(String, index=True)
 
@@ -39,7 +38,7 @@ class Author(CrudBase, Base):
     __tablename__ = 'authors'
 
     id = Column(Integer, primary_key=True, index=True)
-    api_id = Column(String, unique=True, index=True)
+    api_id = Column(String, index=True)
     slug = Column(String, unique=True, index=True)
     name = Column(String, index=True)
     birth_date = Column(String, index=True)
