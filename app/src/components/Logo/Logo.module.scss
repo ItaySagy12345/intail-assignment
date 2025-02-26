@@ -1,4 +1,4 @@
-@import '@/styles/mixins.scss';
+@use '@/styles/mixins' as *;
 
 .logo {
   font-size: 20px;

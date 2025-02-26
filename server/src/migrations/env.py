@@ -1,10 +1,13 @@
+import sys
 import os
 from dotenv import load_dotenv
 from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
-from src.models.models import Base
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+from src.models.models import Base
 
 load_dotenv()
 
@@ -12,7 +15,7 @@ config = context.config
 
 fileConfig(config.config_file_name)
 
-database_url = os.getenv('DATABASE_URL')
+database_url = os.getenv('POSTGRES_URL')
 
 config.set_main_option('sqlalchemy.url', database_url)
 

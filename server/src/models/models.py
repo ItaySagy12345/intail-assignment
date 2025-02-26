@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from src.database.crud_base import CrudBase
 from sqlalchemy.orm import relationship
+from src.database.crud_base import CrudBase
+
 
 Base = declarative_base()
 
