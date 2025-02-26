@@ -13,5 +13,6 @@ def author_dep(slug: str, db: Session = Depends(db_dep)) -> Author:
     Return: [Author]: The author db model
     """
     
-    author: Union[Author, None] = Author.find(db=db, slug=slug)
+    query = (Author.slug == slug)
+    author: Union[Author, None] = Author.find(db=db, query=query)
     return author

@@ -10,6 +10,9 @@ CONFIG = {
     "authors_api": {
         "domain": os.getenv('AUTHORS_API')
     },
+    "cache": {
+        "redis_url": os.getenv('REDIS_URL'),
+    },
     "db": {
         "postgres_host": os.getenv('POSTGRES_HOST'),
         "postgres_port": int(os.getenv('POSTGRES_PORT', 5432)),

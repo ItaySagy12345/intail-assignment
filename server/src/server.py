@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -11,9 +12,13 @@ from src.config.config import CONFIG
 
 scheduler = BackgroundScheduler()
 
+def run_scrape_quotes_task():
+    asyncio.run(scrape_quotes_task()) 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    scheduler.add_job(scrape_quotes_task, 'interval', seconds=1 * 10)
+    scheduler.add_job(run_scrape_quotes_task, 'interval', seconds=1 * 5)
+    # scheduler.add_job(run_scrape_quotes_task, 'interval', seconds=1 * 60 * 60)
     scheduler.start()
     yield
     scheduler.shutdown()

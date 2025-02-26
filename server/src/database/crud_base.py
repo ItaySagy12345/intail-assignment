@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.declarative import DeclarativeMeta
+from sqlalchemy.sql.expression import BinaryExpression
 from pydantic import BaseModel
 from typing import Union
 from src.generics.api_interfaces import APIFilter
@@ -44,7 +45,7 @@ class CrudBase:
 
 
     @classmethod
-    def find(cls: DeclarativeMeta, db: Session, slug: str) -> Union[DeclarativeMeta, None]:
+    def find(cls: DeclarativeMeta, db: Session, query: BinaryExpression) -> Union[DeclarativeMeta, None]:
         """
         Find method for database models
         Param: db [Session]: The database session
@@ -52,7 +53,7 @@ class CrudBase:
         Return [Union[DeclarativeMeta, None]]: The found record if there was one
         """
 
-        return db.query(cls).filter(cls.slug == slug).first() 
+        return db.query(cls).filter(query).first()
 
     @classmethod
     def create(cls: DeclarativeMeta, db: Session, data: BaseModel) -> DeclarativeMeta:
