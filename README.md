@@ -24,7 +24,7 @@ It was built with **ReactJs**, **FastAPI**, **PostgreSQL**, **Redis**, and **Doc
 - [Backend]: Create your python venv: Run "make init2". To remove the venv, run "make destroy2", if needed
 - [Backend]: Navigate to server/src/server.py and on line 20 change the "seconds=1 * 60 * 60" to 1, so that you can start scraping right after running the server locally for the first time.
 
-<!-- For all Make commands, run from the root project dir -->
+- [Note]: --For all Make commands, run from the root project dir--
 - [Frontend]: Start the react app: run "make app". 
 - [Docker]: Build the necessary docker images: run "make build", then "make up". Run "make down" to shut your docker container down when you're done using the app.
 - [Redis]: Start Redis: run "make redis".  
