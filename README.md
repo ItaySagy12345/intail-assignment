@@ -24,7 +24,7 @@ It was built with **ReactJs**, **FastAPI**, **PostgreSQL**, **Redis**, and **Doc
 
 ## Setup
 
-- [Project]: git@github.com:ItaySagy12345/intail-assignment.git
+- Clone the repo
 - [Env]: Make .env files, one in app dir of the frontend and one in the server dir of the backend, with the env data I sent you by email, respectively.
 - [Frontend]: Create your node_modules and package-lock.json: Run "make init1". To remove the node_modules, run "make destroy1", if needed
 - [Backend]: Create your python venv: Run "make init2". To remove the venv, run "make destroy2", if needed
