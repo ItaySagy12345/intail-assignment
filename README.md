@@ -18,17 +18,17 @@ It was built with **ReactJs**, **FastAPI**, **PostgreSQL**, **Redis**, and **Doc
 
 ## Setup
 
-[Clone]: git@github.com:ItaySagy12345/intail-assignment.git
-[Env]: Make .env files, one in app dir of the frontend and one in the server dir of the backend, with the env data I sent you by email, respectively.
-[Frontend]: Create your node_modules and package-lock.json: Run "make init1". To remove the node_modules, run "make destroy1", if needed
-[Backend]: Create your python venv: Run "make init2". To remove the venv, run "make destroy2", if needed
-[Backend]: Navigate to server/src/server.py and on line 20 change the "seconds=1 * 60 * 60" to 1, so that you can start scraping right after running the server locally for the first time.
+- [Clone]: git@github.com:ItaySagy12345/intail-assignment.git
+- [Env]: Make .env files, one in app dir of the frontend and one in the server dir of the backend, with the env data I sent you by email, respectively.
+- [Frontend]: Create your node_modules and package-lock.json: Run "make init1". To remove the node_modules, run "make destroy1", if needed
+- [Backend]: Create your python venv: Run "make init2". To remove the venv, run "make destroy2", if needed
+- [Backend]: Navigate to server/src/server.py and on line 20 change the "seconds=1 * 60 * 60" to 1, so that you can start scraping right after running the server locally for the first time.
 
 <!-- For all Make commands, run from the root project dir -->
-[Frontend]: Start the react app: run "make app". 
-[Docker]: Build the necessary docker images: run "make build", then "make up". Run "make down" to shut your docker container down when you're done using the app.
-[Redis]: Start Redis: run "make redis".  
-[Backend]: Start the FastAPI server: run "make server" or if using vscode and you want to debug, just use the .vscode/launch.json provided
+- [Frontend]: Start the react app: run "make app". 
+- [Docker]: Build the necessary docker images: run "make build", then "make up". Run "make down" to shut your docker container down when you're done using the app.
+- [Redis]: Start Redis: run "make redis".  
+- [Backend]: Start the FastAPI server: run "make server" or if using vscode and you want to debug, just use the .vscode/launch.json provided
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ It was built with **ReactJs**, **FastAPI**, **PostgreSQL**, **Redis**, and **Doc
 
 ## Testing
 
-[Frontend]: http://localhost:5173 : app GUI
-[Backend]: http://localhost:8000/docs : FastAPI Swagger GUI
-[Database]: http://localhost:8080 : Pgadmin GUI
-[Docker]: Docker Desktop to check logs in running container/services
+- [Frontend]: http://localhost:5173 : app GUI
+- [Backend]: http://localhost:8000/docs : FastAPI Swagger GUI
+- [Database]: http://localhost:8080 : Pgadmin GUI
+- [Docker]: Docker Desktop to check logs in running container/services
