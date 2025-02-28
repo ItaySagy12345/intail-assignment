@@ -17,8 +17,7 @@ def run_scrape_quotes_task():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    scheduler.add_job(run_scrape_quotes_task, 'interval', seconds=1 * 5)
-    # scheduler.add_job(run_scrape_quotes_task, 'interval', seconds=1 * 60 * 60)
+    scheduler.add_job(run_scrape_quotes_task, 'interval', seconds=1 * 60 * 60)
     scheduler.start()
     yield
     scheduler.shutdown()

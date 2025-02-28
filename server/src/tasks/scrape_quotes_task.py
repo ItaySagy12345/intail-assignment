@@ -15,6 +15,7 @@ from src.schemas.authors_schemas import AuthorCreateSchema, AuthorSchema
 from src.schemas.books_schemas import BookCreateSchema
 from src.schemas.author_books import AuthorBookCreateSchema
 from src.cache.config import redis_cache
+from src.utils.string_helpers import format_slug
 
 
 MAX_BOOKS = 5
@@ -42,7 +43,7 @@ async def scrape_quotes_task() -> None:
                 for quote_element in quote_elements:
                     quote_author: str = quote_element.find_element(By.CLASS_NAME, "author").text
                     quote_text: str = quote_element.find_element(By.CLASS_NAME, "text").text
-                    quote_slug: str = f"{quote_author[:10]}-{quote_text[:15]}"
+                    quote_slug: str = format_slug(slug=f"{quote_author[:10]}-{quote_text[:15]}")
                     quote_query = (Quote.slug == quote_slug)
                     quote_exists: Union[Quote, None] = Quote.find(db=db, query=quote_query)
                     quote_count: int = Quote.count(db=db)
@@ -53,14 +54,14 @@ async def scrape_quotes_task() -> None:
                             create_quote = QuoteCreateSchema(
                                 slug=quote_slug,
                                 text=quote_text,
-                                author=quote_author
+                                author=format_slug(slug=quote_author)
                             )
-                            new_quote: Quote = Quote.create(db, create_quote)
+                            Quote.create(db, create_quote)
 
-                            (author_meta, books_meta) = await author_meta_service(author=new_quote.author, book_limit=MAX_BOOKS)
+                            (author_meta, books_meta) = await author_meta_service(author=quote_author, book_limit=MAX_BOOKS)
                             author_key: str = author_meta["key"]
                             author_name: str = author_meta["name"]
-                            author_slug: str = author_meta["name"]
+                            author_slug: str = format_slug(slug=author_meta["name"])
                             author_birth_date: str = author_meta.get("birth_date", '')
                             author_death_date: str = author_meta.get("death_date", None)
                             author_query = (Author.slug == author_slug)
@@ -82,7 +83,7 @@ async def scrape_quotes_task() -> None:
                                 for book in books:
                                     book_key: str = book["key"]
                                     book_name: str = book["title"]
-                                    book_slug: str = book["title"]
+                                    book_slug: str = format_slug(slug=book["title"])
                                     book_query = (Book.slug == book_slug)
                                     book_exists: Union[Book, None] = Book.find(db=db, query=book_query)
                                     if book_exists is None:
