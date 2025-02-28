@@ -1,9 +1,21 @@
-# Javascript npm management
+# App
 .PHONY: app
-
 app:
 	cd app && npm run dev
 
+# Server
+.PHONY: server
+server:
+	cd server/src && PYTHONPATH=$(PWD)/server uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+
+# Redis
+redis:
+	redis-server
+
+redis-clear:
+	redis-cli FLUSHALL
+
+# Javascript npm management
 init1:
 	cd app && npm i
 

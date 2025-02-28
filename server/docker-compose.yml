@@ -31,6 +31,37 @@ services:
       - ./pgpass:/pgpass
       - ./servers.json:/pgadmin4/servers.json
 
+  # server:
+  #   image: server
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: server-container
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     POSTGRES_URL: ${POSTGRES_URL}
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - quote-master-net
+  #   volumes:
+  #     - .:/app
+  #   command: >
+  #     sh -c "
+  #       echo 'Waiting for Postgres to be ready...';
+  #       until nc -z -v -w30 postgres 5432; do
+  #         echo 'Waiting for Postgres...';
+  #       done;
+
+  #       echo 'Postgres is up, running migrations...';
+  #       alembic upgrade head && 
+  #       echo 'Migrations complete';
+  #       uvicorn src.server:app --host 0.0.0.0 --port 8000
+  #     "
+
 networks:
   quote-master-net:
     driver: bridge

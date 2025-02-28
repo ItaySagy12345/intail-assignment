@@ -22,7 +22,7 @@ async def author_meta_service(author: str, book_limit: int) -> tuple[dict, dict]
         author_initial_meta = await client.get(f"{CONFIG['authors_api']['domain']}/search/authors.json?q={query_suffix}")
         author_initial_meta = author_initial_meta.json()
 
-        if "docs" in author_initial_meta and "key" in author_initial_meta["docs"][0]:
+        if "docs" in author_initial_meta and len(author_initial_meta["docs"]) > 0 and "key" in author_initial_meta["docs"][0]:
             author_key: str = author_initial_meta["docs"][0]["key"]
         else:
             raise ArgumentsError(message="Could not find author information")
